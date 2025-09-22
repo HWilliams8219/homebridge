@@ -58,6 +58,40 @@ export { LogLevel } from './logger.js'
 export type { Logger, Logging } from './logger.js'
 
 /**
+ * Export Matter shared types for UI integration
+ */
+export type {
+  ChildMatterConfiguration,
+  MatterAccessoriesResponse,
+  MatterAccessoryInfo,
+  MatterBridgeMetadata,
+  MatterCommissioningInfo,
+  MatterServerConfig,
+} from './matter/matterSharedTypes.js'
+
+export {
+  ChildMatterMessageType,
+  MatterBridgeStatus,
+} from './matter/matterSharedTypes.js'
+
+/**
+ * Export Matter types
+ */
+export type { MatterBridgeOptions, MatterConfiguration } from './matter/matterTypes.js'
+
+/**
+ * Export Matter types and utilities
+ */
+export type { HAPToMatterClusterMapping, HAPToMatterDeviceMapping } from './matter/matterTypes.js'
+
+export {
+  getMatterClustersForHAPService,
+  getMatterDeviceTypeForHAPService,
+  MatterClusters,
+  MatterDeviceTypes,
+} from './matter/matterTypes.js'
+
+/**
  * Export Platform Accessory const enums
  */
 export { PlatformAccessoryEvent } from './platformAccessory.js'

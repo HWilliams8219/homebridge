@@ -125,6 +125,7 @@ export interface ChildBridgePairedStatusEventData {
 }
 
 export interface ChildMetadata {
+  type: 'hap' // Bridge type identifier
   status: ChildBridgeStatus
   paired?: boolean | null
   setupUri?: string | null
@@ -537,6 +538,7 @@ export class ChildBridgeService {
    */
   public getMetadata(): ChildMetadata {
     return {
+      type: 'hap' as const, // Explicitly identify as HAP bridge
       status: this.bridgeStatus,
       paired: this.pairedStatus,
       setupUri: this.setupUri,

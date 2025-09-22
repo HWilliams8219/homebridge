@@ -73,12 +73,22 @@ export interface AccessoryConfig extends Record<string, any> {
   name: string
   uuid_base?: string
   _bridge?: BridgeConfiguration
+  _matter?: {
+    name?: string
+    port?: number
+    debug?: boolean
+  }
 }
 
 export interface PlatformConfig extends Record<string, any> {
   platform: PlatformName | PlatformIdentifier
   name?: string
   _bridge?: BridgeConfiguration
+  _matter?: {
+    name?: string
+    port?: number
+    debug?: boolean
+  }
 }
 
 export interface HomebridgeConfig {
@@ -128,7 +138,7 @@ export class BridgeService {
     private externalPortService: ExternalPortService,
     private bridgeOptions: BridgeOptions,
     private bridgeConfig: BridgeConfiguration,
-    private config: HomebridgeConfig,
+    private _config: HomebridgeConfig,
   ) {
     this.storageService = new StorageService(this.bridgeOptions.cachedAccessoriesDir)
     this.storageService.initSync()
@@ -213,7 +223,7 @@ export class BridgeService {
     }
 
     log.debug('Publishing bridge accessory (name: %s, publishInfo: %o).', this.bridge.displayName, BridgeService.strippingPinCode(publishInfo))
-    this.bridge.publish(publishInfo, this.allowInsecureAccess)
+    void this.bridge.publish(publishInfo, this.allowInsecureAccess)
   }
 
   /**
@@ -450,7 +460,7 @@ export class BridgeService {
       }
 
       log.debug('Publishing external accessory (name: %s, publishInfo: %o).', hapAccessory.displayName, BridgeService.strippingPinCode(publishInfo))
-      hapAccessory.publish(publishInfo, this.allowInsecureAccess)
+      void hapAccessory.publish(publishInfo, this.allowInsecureAccess)
     }
   }
 
@@ -540,9 +550,9 @@ export class BridgeService {
   }
 
   teardown(): void {
-    this.bridge.unpublish()
+    void this.bridge.unpublish()
     for (const accessory of this.publishedExternalAccessories.values()) {
-      accessory._associatedHAPAccessory.unpublish()
+      void accessory._associatedHAPAccessory.unpublish()
     }
 
     this.saveCachedPlatformAccessoriesOnDisk()

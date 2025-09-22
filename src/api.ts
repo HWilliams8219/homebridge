@@ -9,6 +9,14 @@ import hapNodeJs from 'hap-nodejs'
 import semver from 'semver'
 
 import { Logger } from './logger.js'
+import {
+  getMatterClustersForHAPService,
+  getMatterDeviceTypeForHAPService,
+  HAPToMatterClusterMapping,
+  HAPToMatterDeviceMapping,
+  MatterClusters,
+  MatterDeviceTypes,
+} from './matter/index.js'
 import { PlatformAccessory } from './platformAccessory.js'
 import { PluginManager } from './pluginManager.js'
 import { User } from './user.js'
@@ -176,6 +184,17 @@ export interface API {
   readonly platformAccessory: typeof PlatformAccessory
   // ------------------------------------------------------------------------
 
+  // ------------------ MATTER EXPORTS ------------------
+  readonly matter: {
+    readonly clusters: typeof MatterClusters
+    readonly deviceTypes: typeof MatterDeviceTypes
+    readonly hapToMatterClusterMapping: typeof HAPToMatterClusterMapping
+    readonly hapToMatterDeviceMapping: typeof HAPToMatterDeviceMapping
+    readonly getMatterDeviceTypeForHAPService: typeof getMatterDeviceTypeForHAPService
+    readonly getMatterClustersForHAPService: typeof getMatterClustersForHAPService
+  }
+  // ------------------------------------------------------------------------
+
   /**
    * Returns true if the current running homebridge version is greater or equal to the
    * passed version string.
@@ -222,6 +241,17 @@ export class HomebridgeAPI extends EventEmitter implements API {
   readonly hap = hapNodeJs
   readonly hapLegacyTypes = hapNodeJs.LegacyTypes // used for older accessories/platforms
   readonly platformAccessory = PlatformAccessory
+  // ------------------------------------------------------------------------
+
+  // ------------------ MATTER EXPORTS ------------------
+  readonly matter = {
+    clusters: MatterClusters,
+    deviceTypes: MatterDeviceTypes,
+    hapToMatterClusterMapping: HAPToMatterClusterMapping,
+    hapToMatterDeviceMapping: HAPToMatterDeviceMapping,
+    getMatterDeviceTypeForHAPService,
+    getMatterClustersForHAPService,
+  }
   // ------------------------------------------------------------------------
 
   constructor() {

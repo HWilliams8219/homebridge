@@ -13,5 +13,6 @@
     "invalidLink": true,
     "notExported": false
   },
-  "inlineTags": ["@link", "@see"]
+  "inlineTags": ["@link", "@see"],
+  "projectDocuments": ["CHANGELOG.md", "MATTER.md"]
 }
