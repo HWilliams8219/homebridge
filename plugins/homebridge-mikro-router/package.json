@@ -1,0 +1,26 @@
+{
+  "name": "homebridge-mikro-router",
+  "version": "1.0.0",
+  "description": "Homebridge plugin for MikroTik routers — exposes wireless interfaces as HomeKit switches",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "mikrotik",
+    "router"
+  ],
+  "engines": {
+    "node": ">=18",
+    "homebridge": ">=1.6.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "homebridge": "^1.6.0"
+  }
+}
