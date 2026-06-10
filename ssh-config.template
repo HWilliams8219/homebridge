@@ -1,0 +1,34 @@
+# SSH Config Template — Homebridge Server
+# Copy this file to ~/.ssh/config (or append to an existing one)
+# Replace all <PLACEHOLDER> values with your actual settings
+
+Host homebridge
+    # Friendly alias used in `ssh homebridge` commands
+    HostName <HOMEBRIDGE_IP_OR_HOSTNAME>
+    # e.g. 192.168.1.100  or  homebridge.local
+
+    User <SSH_USERNAME>
+    # Typical default on Raspberry Pi: pi
+
+    Port 22
+    # Change if your Pi uses a non-standard SSH port
+
+    IdentityFile ~/.ssh/<YOUR_PRIVATE_KEY>
+    # e.g. ~/.ssh/id_ed25519  or  ~/.ssh/id_rsa
+
+    # Keep the connection alive while idle
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+
+    # Optional: disable host-key checking for local LAN hosts only
+    # (remove or comment out for public-facing servers)
+    # StrictHostKeyChecking no
+    # UserKnownHostsFile /dev/null
+
+# ---------------------------------------------------------------------------
+# Usage after copying to ~/.ssh/config:
+#
+#   ssh homebridge          — open a shell
+#   scp file homebridge:~   — copy a file
+#   ssh homebridge 'cmd'    — run a remote command
+# ---------------------------------------------------------------------------
